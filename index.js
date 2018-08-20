@@ -12,13 +12,22 @@ app.on('ready', () => {
 })
 
 const menuTemplate = [
-    {},
     {
         label: 'Menu',
         submenu: [
             {
                 label: 'Adicionar comentário'
+            },
+            {
+                label: 'Sair da aplicação',
+                click() {
+                    app.quit();
+                }
             }
         ]
     }
 ]
+
+if (process.platform === 'darwin') {
+    menuTemplate.unshift({});
+}
