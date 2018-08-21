@@ -3,6 +3,7 @@ const electron = require('electron');
 const { app, BrowserWindow, Menu } = electron;
 
 let mainWindow;
+let commentWindow;
 
 app.on('ready', () => {
     mainWindow = new BrowserWindow({});
@@ -11,12 +12,23 @@ app.on('ready', () => {
     Menu.setApplicationMenu(mainMenu);
 })
 
+function createCommentWindow() {
+    commentWindow = new BrowserWindow({
+        width: 500,
+        height: 300,
+        title: 'Novo comentário'
+    });
+}
+
 const menuTemplate = [
     {
         label: 'Menu',
         submenu: [
             {
-                label: 'Adicionar comentário'
+                label: 'Adicionar comentário',
+                click() {
+                    createCommentWindow();
+                }
             },
             {
                 label: 'Sair da aplicação',
