@@ -20,6 +20,7 @@ const menuTemplate = [
             },
             {
                 label: 'Sair da aplicação',
+                accelerator: process.platform === 'win32' ? 'Alt+F4' : 'Cmd+Q',
                 click() {
                     app.quit();
                 }
