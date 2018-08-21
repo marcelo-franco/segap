@@ -18,6 +18,7 @@ function createCommentWindow() {
         height: 300,
         title: 'Novo comentário'
     });
+    commentWindow.loadURL(`file://${__dirname}/comment.html`);
 }
 
 const menuTemplate = [
