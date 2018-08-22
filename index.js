@@ -1,6 +1,6 @@
 const electron = require('electron');
 
-const { app, BrowserWindow, Menu } = electron;
+const { app, BrowserWindow, Menu, ipcMain } = electron;
 
 let mainWindow;
 let commentWindow;
@@ -22,6 +22,10 @@ function createCommentWindow() {
     });
     commentWindow.loadURL(`file://${__dirname}/comment.html`);
 }
+
+ipcMain.on('addComment', (event, comment) => {
+    mainWindow.webContents.send('addComment', comment);
+})
 
 const menuTemplate = [
     {
