@@ -21,10 +21,12 @@ function createCommentWindow() {
         title: 'Novo comentário'
     });
     commentWindow.loadURL(`file://${__dirname}/comment.html`);
+    commentWindow.on('closed', () => commentWindow = null);
 }
 
 ipcMain.on('addComment', (event, comment) => {
     mainWindow.webContents.send('addComment', comment);
+    commentWindow.close();
 })
 
 const menuTemplate = [
