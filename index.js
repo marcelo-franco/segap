@@ -63,7 +63,7 @@ if (process.env.NODE_ENV !== 'production') {
     //development
     //production
     //test... etc
-    menuTemplate.push({
+    const devTemplate = {
         label: 'Dev',
         submenu: [
             { role: 'reload' },
@@ -75,5 +75,9 @@ if (process.env.NODE_ENV !== 'production') {
                 }
             }
         ]
-    })
+    };
+    menuTemplate.push(devTemplate);
+    if (process.platform !== 'darwin') {
+        commentMenu = Menu.buildFromTemplate([devTemplate]);
+    }
 }
