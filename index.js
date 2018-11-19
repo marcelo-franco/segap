@@ -1,6 +1,6 @@
 const electron = require('electron');
 
-const { app, BrowserWindow, Menu, ipcMain } = electron;
+const { app, BrowserWindow, Menu, ipcMain, dialog } = electron;
 
 let mainWindow;
 let commentWindow;
@@ -34,6 +34,14 @@ ipcMain.on('addComment', (event, comment) => {
     commentWindow.close();
 })
 
+const exitDialogOptions = {
+    type: 'question',
+    buttons: ['Não', 'Sim'],
+    defaultId: 0,
+    message: 'Deseja sair?',
+    detail: 'A aplicação será fechada'
+  };
+
 const menuTemplate = [
     {
         label: 'Menu',
@@ -48,7 +56,11 @@ const menuTemplate = [
                 label: 'Sair da aplicação',
                 accelerator: process.platform === 'win32' ? 'Alt+F4' : 'Cmd+Q',
                 click() {
-                    app.quit();
+                    dialog.showMessageBox(null, exitDialogOptions, (response) => {
+                        if (response === 1) {
+                            app.quit();
+                        }
+                    });                    
                 }
             }
         ]
