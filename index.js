@@ -7,7 +7,11 @@ let commentWindow;
 let commentMenu = null; // não desejo a barra de menu
 
 app.on('ready', () => {
-    mainWindow = new BrowserWindow({});
+    mainWindow = new BrowserWindow({
+        webPreferences:{
+            nodeIntegration: true
+        }
+    });
     mainWindow.loadURL(`file://${__dirname}/main.html`);
     mainWindow.on('closed', () => app.quit());
 
@@ -19,7 +23,10 @@ function createCommentWindow() {
     commentWindow = new BrowserWindow({
         width: 500,
         height: 300,
-        title: 'Novo comentário'
+        title: 'Novo comentário',
+        webPreferences: {
+           nodeIntegration: true
+       }
     });
     commentWindow.loadURL(`file://${__dirname}/comment.html`);
     commentWindow.on('closed', () => commentWindow = null);
